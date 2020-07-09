@@ -1,5 +1,6 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
+const colors = document.getElementsByClassName("jsColor");
 
 // canvas는 두개의 사이즈를 정의 해 줘야함 
 // 1. css의 canvas사이즈 - css
@@ -35,8 +36,9 @@ function onMouseMove(event){
     }
 }
 
-function onMouseDown(event){
-    painting = true;
+function handleColorClick(event){
+    const color = event.target.style.backgroundColor
+    ctx.strokeStyle = color;
 }
 
 if(canvas){
@@ -45,3 +47,7 @@ if(canvas){
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
 }
+
+Array.from(colors).forEach(
+    color => color.addEventListener("click", handleColorClick)
+);
